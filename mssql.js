@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+let Meteor = Package.meteor.Meteor;
 
 let sql = require('mssql');
 
