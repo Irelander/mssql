@@ -1,4 +1,4 @@
-let sql = require('mssql');
+let sql = Npm.require('mssql');
 
 export const Sql = {};
 
