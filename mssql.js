@@ -1,5 +1,3 @@
-let Meteor = Package.meteor.Meteor;
-
 let sql = require('mssql');
 
 export const Sql = {};
