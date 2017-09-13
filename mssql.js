@@ -1,6 +1,6 @@
 let sql = Npm.require('mssql');
 
-export const Sql = {};
+const Sql = {};
 
 Sql.driver = sql;
 
