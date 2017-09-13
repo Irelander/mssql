@@ -1,7 +1,7 @@
 Package.describe({
   name: "irelander:mssql",
   summary: "mssql wrapper: non-reactive SQL Server package fork from emgee:mssql",
-  version: "1.0.4",
+  version: "1.0.5",
   git: "https://github.com/Irelander/mssql.git",
   documentation: "README.md"
 });
@@ -13,6 +13,4 @@ Package.onUse(function(api) {
   api.use(['underscore','ecmascript'], 'server');
   api.addFiles("mssql.js", "server");
   api.export("Sql", "server");
-
-  api.mainModule('mssql.js');
 });

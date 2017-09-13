@@ -1,6 +1,6 @@
-let sql = Npm.require('mssql');
+var sql = Npm.require('mssql');
 
-const Sql = {};
+Sql = {};
 
 Sql.driver = sql;
 
