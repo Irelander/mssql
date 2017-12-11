@@ -15,25 +15,24 @@ if (! Meteor.settings.database ||
 }
 
 
-Sql.new = Meteor.wrapAsync(newConnection);
-
-function newConnection (info){
+Sql.new = function (info){
   let newSql = {};
+  newSql.driver =  Npm.require('mssql');
 
   if (! info ||
     ! info.user ||
     ! info.password) {
     console.error('database infomation invaild!');
   } else {
-    newSql.connection = new Sql.driver.Connection(info, function (err) {
+    newSql.connection = new newSql.driver.Connection(info, function (err) {
       if (err) console.log("Can't connect to database!");
       else console.log('connect success!');
     });
   }
 
-  newSql.q = Meteor.wrapAsync(sqlQuery);
+  newSql.q = Meteor.wrapAsync(newSqlQuery);
 
-  function sqlQuery (query, inputs, cb) {
+  function newSqlQuery (query, inputs, cb) {
     try {
       if (typeof inputs === 'function') {
         cb = inputs;
@@ -64,9 +63,9 @@ function newConnection (info){
 
 
 
-  newSql.ps = Meteor.wrapAsync(prepareStatement);
+  newSql.ps = Meteor.wrapAsync(newPrepareStatement);
 
-  function prepareStatement (opts, cb) {
+  function newPrepareStatement (opts, cb) {
     opts = opts || {};
     opts.inputs = opts.inputs || {};
 
@@ -88,9 +87,9 @@ function newConnection (info){
 
 
 
-  newSql.sp = Meteor.wrapAsync(storedProcedure);
+  newSql.sp = Meteor.wrapAsync(newStoredProcedure);
 
-  function storedProcedure (opts, cb) {
+  function newStoredProcedure (opts, cb) {
     opts = opts || {};
     opts.inputs = opts.inputs || {};
     opts.outputs = opts.outputs || {};
