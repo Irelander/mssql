@@ -10,7 +10,7 @@ if (! Meteor.settings.database ||
   console.error('mssql: Database unconfigured');
 } else {
   Sql.connection = new Sql.driver.Connection(Meteor.settings.database, function (err) {
-    if (err) console.log("Can't connect to database");
+    if (err) console.log("Can't connect to "+Meteor.settings.database.database);
   });
 }
 
@@ -25,8 +25,7 @@ Sql.new = function (info){
     console.error('database infomation invaild!');
   } else {
     newSql.connection = new newSql.driver.Connection(info, function (err) {
-      if (err) console.log("Can't connect to database!");
-      else console.log('connect success!');
+      if (err) console.log("Can't connect to "+info.database);
     });
   }
 
