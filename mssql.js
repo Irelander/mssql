@@ -15,17 +15,25 @@ if (! Meteor.settings.database ||
 }
 
 
-Sql.new = function (info){
+Sql.new = Meteor.wrapAsync(newConnection);
+
+function newConnection (info, connectCallback){
   let newSql = {};
   newSql.driver =  Npm.require('mssql');
 
   if (! info ||
     ! info.user ||
     ! info.password) {
-    console.error('database infomation invaild!');
+    console.error('database information invalid!');
   } else {
     newSql.connection = new newSql.driver.Connection(info, function (err) {
-      if (err) console.log("Can't connect to "+info.database);
+      if (err) {
+        connectCallback(err);
+        console.log("Can't connect to "+info.database);
+      }else{
+        connectCallback(null, newSql);
+      }
+
     });
   }
 
@@ -107,8 +115,6 @@ Sql.new = function (info){
       return cb(err, recordsets, returnValue)
     });
   }
-
-  return newSql;
 }
 
 
