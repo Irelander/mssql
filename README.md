@@ -158,7 +158,9 @@ prepared statement. The returned function has a method named `unprepare()` that 
 
 
 ### `Sql.sp` - Stored Procedure
+
 <div id="output"></div>
+
 ##### Params:
 ```javascript
 ({ sp : String, inputs : [ { name : String, type : Sql.driver.TYPE, value : val }, ... ], outputs : [ { name : String, type : Sql.driver.TYPE }, ... ], optionalCallback)
