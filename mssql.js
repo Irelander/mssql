@@ -112,6 +112,15 @@ function newConnection (info, connectCallback){
     });
 
     request.execute(opts.sp, function(err, recordsets, returnValue) {
+
+      if (opts.outputs.length > 0){
+        recordsets.outputs = opts.outputs.reduce((result, o)=>{
+
+          result[o.name] = request.parameters[o.name].value;
+          return result;
+        }, {});
+      }
+
       return cb(err, recordsets, returnValue)
     });
   }
