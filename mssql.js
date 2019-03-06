@@ -107,8 +107,8 @@ function newConnection (info, connectCallback){
       request.input(i.name, i.type, i.value);
     });
 
-    _.each(opts.outputs, function (type, name) {
-      request.output(name, type);
+    _.each(opts.outputs, function (i) {
+      request.output(i.name, i.type);
     });
 
     request.execute(opts.sp, function(err, recordsets, returnValue) {
