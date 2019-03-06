@@ -2,6 +2,14 @@
 
 Carefully extended emgee:mssql package. This package is meant to replace original emgee:mssql, emgee:mssql should be removed to avoid interference and unexpected behavior.
 
+## Change Log
+ - 06/03/2019
+ 	- add enable SP OUTPUT parameters, and will return outputs param after sp execute! <a href="#output"> see the document!</a>
+
+ - 02/02/2019
+	- resolves issues that previously had a connection asynchronously from ``Sql.new`` function
+
+
 ## Update API
 
 ### `Sql.new` - Get New Sql connection
@@ -150,10 +158,10 @@ prepared statement. The returned function has a method named `unprepare()` that 
 
 
 ### `Sql.sp` - Stored Procedure
-
+<div id="output"></div>
 ##### Params:
 ```javascript
-({ sp : String, inputs : [ { name : String, type : Sql.driver.TYPE, value : val }, ... ], outputs : { key : value } }, optionalCallback)
+({ sp : String, inputs : [ { name : String, type : Sql.driver.TYPE, value : val }, ... ], outputs : [ { name : String, type : Sql.driver.TYPE }, ... ], optionalCallback)
 ```
 
 ```javascript
@@ -165,10 +173,11 @@ prepared statement. The returned function has a method named `unprepare()` that 
         value : 42
         }, ...
       ],
-      outputs : {
-        output1 : Sql.driver.Int,
-        ...
-      }
+      outputs : [ {
+        name  : "param1",
+        type  : Sql.driver.Int
+        }, ...
+      ]
     }
 
     // Sync-style
@@ -181,4 +190,13 @@ prepared statement. The returned function has a method named `unprepare()` that 
     Sql.sp(opts, function (err, res) {
 
     });
+    
+    // if use outputs
+	# response have outputs field
+	Sql.sp(opts, function(err, res){
+	
+		console.log(res.outputs) ---> { param1 : value, .... }
+	
+	});
+    
 ```

@@ -1,7 +1,7 @@
 Package.describe({
   name: "irelander:mssql",
   summary: "mssql wrapper: non-reactive SQL Server package fork from emgee:mssql",
-  version: "1.1.0",
+  version: "1.1.1",
   git: "https://github.com/Irelander/mssql.git",
   documentation: "README.md"
 });
